@@ -11,6 +11,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [s390x]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   noarch: python
 
@@ -19,13 +20,18 @@ requirements:
     - python
     - pip
   run:
-    - python
+    - python >=3.6
     - mypy_extensions >=0.3.0
     - typing_extensions >=3.7.4
 
 test:
   imports:
     - typing_inspect
+  requires:
+    - pip
+    - python <3.10
+  commands:
+    - pip check
 
 about:
   home: http://github.com/ilevkivskyi/typing_inspect
