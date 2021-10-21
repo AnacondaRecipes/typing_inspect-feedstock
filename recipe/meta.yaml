@@ -19,6 +19,8 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python >=3.6
     - mypy_extensions >=0.3.0
@@ -37,7 +39,10 @@ about:
   home: http://github.com/ilevkivskyi/typing_inspect
   license: MIT
   license_file: LICENSE
+  license_family: MIT
   summary: The “typing_inspect” module defines experimental API for runtime inspection of types defined in the standard “typing” module.
+  dev_url: http://github.com/ilevkivskyi/typing_inspect
+  doc_url: https://libraries.io/pypi/typing-inspect 
 
 extra:
   recipe-maintainers:
