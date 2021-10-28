@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  # s390x has missing dependencies 
+  # s390x has missing dependencies mypy_extensions >=0.3.0
   skip: true  # [py<3.6 or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   noarch: python
