@@ -1,5 +1,5 @@
 {% set name = "typing_inspect" %}
-{% set version = "0.6.0" %}
+{% set version = "0.7.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8f1b1dd25908dbfd81d3bebc218011531e7ab614ba6e5bf7826d887c834afab7
+  sha256: 047d4097d9b17f46531bf6f014356111a1b6fb821a24fe7ac909853ca2a782aa
 
 build:
   number: 0
+  # s390x has missing dependencies mypy_extensions >=0.3.0
+  skip: true  # [py<36 or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   noarch: python
 
@@ -18,20 +20,30 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
-    - python
+    - python >=3.6
     - mypy_extensions >=0.3.0
     - typing_extensions >=3.7.4
 
 test:
   imports:
     - typing_inspect
+  requires:
+    - pip
+    - python <3.10
+  commands:
+    - pip check
 
 about:
   home: http://github.com/ilevkivskyi/typing_inspect
   license: MIT
   license_file: LICENSE
+  license_family: MIT
   summary: The “typing_inspect” module defines experimental API for runtime inspection of types defined in the standard “typing” module.
+  dev_url: http://github.com/ilevkivskyi/typing_inspect
+  doc_url: https://libraries.io/pypi/typing-inspect 
 
 extra:
   recipe-maintainers:
